@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "GETting device locatin details"
