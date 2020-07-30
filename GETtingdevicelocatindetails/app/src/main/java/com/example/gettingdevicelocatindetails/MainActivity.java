@@ -12,6 +12,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -26,34 +27,30 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
 
     TextView locdetails;
+    Button gett;
     FusedLocationProviderClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gett = findViewById(R.id.getlocc);
         locdetails = findViewById(R.id.textview44);
         client = LocationServices.getFusedLocationProviderClient(this);
+        gett.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDevicedetails();
+            }
+        });
+
     }
 
-    public void getLocation(View view) {
-        getDeviceDetails();
-    }
 
-    private void getDeviceDetails() {
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
+    private void getDevicedetails() {
 
-                Manifest.permission.ACCESS_FINE_LOCATION) ==
-
-                PackageManager.PERMISSION_GRANTED) {
-
-            getDeviceDetails();
-
-
-        } else {
-
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 44);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
         }
         client.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
             @Override
