@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">WeatherByThirdPartyLib</string>
+    <string name="api_key">cb87793129677d797031997f9a30f82e</string>
+</resources>
